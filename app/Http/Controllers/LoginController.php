@@ -25,6 +25,7 @@ class LoginController extends Controller
             $token = rand(1000, 9999);
             session()->forget('token');
             session(['token' => $token]);
+            session(['email' => $username]);
             EmailController::sendMail($username, $name ,session('token'));
             return redirect('/verify');
         } else {
@@ -38,7 +39,6 @@ class LoginController extends Controller
         $email = $request->input('email');
         $pass1 = $request->input('pass1');
         $pass2 = $request->input('pass2');
-        session(['email' => $email]);
         if ($pass1 != $pass2) {
             return redirect('/login?register')->with('message2', 'Passwords do not match');
         }
@@ -53,6 +53,8 @@ class LoginController extends Controller
             $token = rand(1000, 9999);
             session()->forget('token');
             session(['token' => $token]);
+            session(['email' => $email]);
+            dd($email);
             DB::table('users')->insert(['firstname' => $firstname , 'lastname' => $lastname ,'email' => $email, 'password' => $password]);
             EmailController::sendMail($email, $name,session('token'));
             return redirect('/verify');

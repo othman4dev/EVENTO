@@ -60,6 +60,70 @@ document.addEventListener('DOMContentLoaded',function(event){
   }
 
 // This is the start of script :
+function reserveAjax(id, element) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', `/reserve/${id}`, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            if (this.responseText === 'login') {
+                window.location.href = '/login';
+            } else if (this.responseText === 'Reserved') {
+                element.innerHTML = this.responseText + '<i class="bi bi-check"></i>';
+                element.disabled = true;
+            } else {
+                element.innerHTML = 'Reserved <i class="bi bi-check"></i>';
+                element.disabled = true;
+                document.getElementById('alert').style.display = 'flex';
+                document.getElementById('alert-message').innerHTML = this.responseText;
+            }
+        } else {
+            element.innerHTML = 'Failed to reserve' + '<i class="bi bi-x"></i>';
+        }
+    };
+    xhr.send();
+}
+
+// This is the start of script :
+function cancelAjax(id, element) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', `/cancel/${id}`, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            if (this.responseText == 'Canceled') {
+                element.innerHTML =  'Canceled <i class="bi bi-check"></i>';
+                element.disabled = true;
+                window.location.reload();
+            } else {
+                element.innerHTML = 'Cannot cancel <i class="bi bi-x"></i>';
+                element.disabled = true;
+            }
+        } else {
+            element.innerHTML = 'Failed to cancel reservation' + '<i class="bi bi-x"></i>';
+        }
+    };
+    xhr.send();
+}
+
+function searchAjax(element) {
+    if (element.value === '') {
+        document.getElementById('search-results').style.display = 'none';
+    } else {
+        document.getElementById('search-results').style.display = 'flex';
+    }
+    let xhr = new XMLHttpRequest();
+    let search = element.value;
+    xhr.open('GET', `/search/${search}`, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('search-results').innerHTML = this.responseText;
+        } else {
+            console.log('Failed to search');
+        }
+    };
+    xhr.send();
+
+}
+
 let side = true;
 let drop = false;
 function shrinkSide(btn) {
@@ -90,6 +154,17 @@ function shrinkSide(btn) {
     }
 }
 shrinkSide(document.querySelector('.menu-btn'));
+
+let more = false;
+
+function showMore(element) {
+    if (more) {
+        element.style.animationName = 'showLess';
+        more = false;
+    } else {
+        element.style.animationName = 'showMore';
+    }
+}
 function dropdown(it) {
     if (drop) {
         document.getElementById('accountDrop').style.display = 'none';

@@ -11,24 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-    <script src="https://cdn.tiny.cloud/1/w5o6851coln6uxz4eqge6bq0qi2ez0n5zwyprq67sybzjlf9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>QuickTable | Reserve  It Now</title>
 </head>
 <body>
     <header class="index-header">
         <img src="assets/LOGO.svg" class="table-icon" alt="">
-        <div class="search-bar">
-            <input type="text" class="search" onkeyup="searchAjax(this)" placeholder="Search for events">
-            <button class="search-btn"><i class="bi bi-search"></i></button>
-            <div class="search-results" id="search-results">
-                <div class="search-loading">
-                    <div class="loader"></div>
-                </div>
-            </div>
-        </div>
-        
         @if (session('user'))
         <div class="account" id="account-bar" onclick="dropdown(this)">
             <i class="bi bi-person-down" id="arrow" style="font-size: 30px;"></i>
@@ -44,11 +31,11 @@
             <div class="x-btn" onclick="dropdown(this)">
                 <i class="bi bi-x-lg"></i>
             </div>
-            <div class="drop-option" onclick="window.location.href = '/user/profile'">
+            <div class="drop-option">
                 <i class="bi bi-person" style="font-size: 20px;"></i>
                 <span>Profile</span>
             </div>
-            <div class="drop-option" onclick="window.location.href = '/user/settings'">
+            <div class="drop-option">
                 <i class="bi bi-gear" style="font-size: 20px;"></i>
                 <span>Settings</span>
             </div>
@@ -64,28 +51,32 @@
                 <i class="bi bi-list"></i>
             </div>
             <div class="main-side" id="main-side">
-                <div class="side-option" onclick="window.location.href = '/'">
-                    <i class="bi bi-house" style="font-size: 20px;"></i>
-                    <span>Home</span>
+                <div class="side-option">
+                    <i class="bi bi-bar-chart-line" style="font-size: 20px;"></i>
+                    <span>statistics</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/user/events'">
-                    <i class="bi bi-shop-window" style="font-size: 20px;"></i>
+                <div class="side-option">
+                    <i class="bi bi-person-fill" style="font-size: 20px;"></i>
+                    <span>Users</span>
+                </div>
+                <div class="side-option current">
+                    <i class="bi bi-calendar3" style="font-size: 20px;"></i>
                     <span>Events</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/user/reservations'">
-                    <i class="bi bi-ticket-detailed" style="font-size: 20px"></i>
-                    <span>My Tickets</span>
+                <div class="side-option">
+                    <i class="bi bi-diagram-3-fill" style="font-size: 20px;"></i>
+                    <span>Categories</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-info-circle" style="font-size: 20px;" onclick="window.location.href='/user/help'"></i>
-                    <span>Help</span>
+                    <i class="bi bi-ticket-perforated-fill" style="font-size: 20px;"></i>
+                    <span>Reservations</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-person" style="font-size: 20px;" onclick="window.location.href='/user/profile'"></i>
+                    <i class="bi bi-person" style="font-size: 20px;"></i>
                     <span>Profile</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-gear" style="font-size: 20px;" onclick="window.location.href='/user/settings'"></i>
+                    <i class="bi bi-gear" style="font-size: 20px;"></i>
                     <span>Settings</span>
                 </div>
             </div>

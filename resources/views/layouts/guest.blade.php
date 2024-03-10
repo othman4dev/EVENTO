@@ -11,6 +11,10 @@
 <body class="login-body">
     <header class="index-header">
         <h1 class="login-h1"><img src="assets/LOGO.svg" class="table-icon" alt=""></h1>
+        <div class="search-bar">
+            <input type="text" class="search" placeholder="Search for events">
+            <button class="search-btn"><i class="bi bi-search"></i></button>
+        </div>
         <div class="logins">
             <button class="log">Login</button>
             <button class="log">Register</button>

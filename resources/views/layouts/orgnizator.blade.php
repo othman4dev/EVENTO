@@ -19,16 +19,6 @@
 <body>
     <header class="index-header">
         <img src="assets/LOGO.svg" class="table-icon" alt="">
-        <div class="search-bar">
-            <input type="text" class="search" onkeyup="searchAjax(this)" placeholder="Search for events">
-            <button class="search-btn"><i class="bi bi-search"></i></button>
-            <div class="search-results" id="search-results">
-                <div class="search-loading">
-                    <div class="loader"></div>
-                </div>
-            </div>
-        </div>
-        
         @if (session('user'))
         <div class="account" id="account-bar" onclick="dropdown(this)">
             <i class="bi bi-person-down" id="arrow" style="font-size: 30px;"></i>
@@ -44,11 +34,11 @@
             <div class="x-btn" onclick="dropdown(this)">
                 <i class="bi bi-x-lg"></i>
             </div>
-            <div class="drop-option" onclick="window.location.href = '/user/profile'">
+            <div class="drop-option" onclick="window.location.href = '/add'">
                 <i class="bi bi-person" style="font-size: 20px;"></i>
                 <span>Profile</span>
             </div>
-            <div class="drop-option" onclick="window.location.href = '/user/settings'">
+            <div class="drop-option" onclick="window.location.href = '/settings'">
                 <i class="bi bi-gear" style="font-size: 20px;"></i>
                 <span>Settings</span>
             </div>
@@ -68,24 +58,24 @@
                     <i class="bi bi-house" style="font-size: 20px;"></i>
                     <span>Home</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/user/events'">
+                <div class="side-option" onclick="window.location.href = '/myevents'">
                     <i class="bi bi-shop-window" style="font-size: 20px;"></i>
-                    <span>Events</span>
+                    <span>My Events</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/user/reservations'">
-                    <i class="bi bi-ticket-detailed" style="font-size: 20px"></i>
-                    <span>My Tickets</span>
-                </div>
-                <div class="side-option">
-                    <i class="bi bi-info-circle" style="font-size: 20px;" onclick="window.location.href='/user/help'"></i>
-                    <span>Help</span>
+                <div class="side-option" onclick="window.location.href = '/'">
+                    <i class="bi bi-cash-coin" style="font-size: 20px"></i>
+                    <span>Reservations</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-person" style="font-size: 20px;" onclick="window.location.href='/user/profile'"></i>
+                    <i class="bi bi bi-toggles" style="font-size: 20px;"></i>
+                    <span>Switch To User</span>
+                </div>
+                <div class="side-option">
+                    <i class="bi bi-person" style="font-size: 20px;"></i>
                     <span>Profile</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-gear" style="font-size: 20px;" onclick="window.location.href='/user/settings'"></i>
+                    <i class="bi bi-gear" style="font-size: 20px;"></i>
                     <span>Settings</span>
                 </div>
             </div>
