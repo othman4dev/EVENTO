@@ -25,10 +25,10 @@
                     <td>{{ $event->price }} $</td>
                     <td>
                         @if ($event->status == 0)
-                            <a href="/approveReservation/{{ $event->id }}" class="action-btn">Approve <i class="bi bi-file-earmark-check"></i></a>
-                            <a href="/rejectReservation/{{ $event->id }}" class="action-btn">Reject <i class="bi bi-file-earmark-x"></i></a>
+                            <a href="/approveReservation/{{ $event->reservation_id }}" class="action-btn">Approve <i class="bi bi-file-earmark-check"></i></a>
+                            <a href="/rejectReservation/{{ $event->reservation_id }}" class="action-btn">Reject <i class="bi bi-file-earmark-x"></i></a>
                         @elseif ($event->status == 1)
-                            <p>Approved <i class="bi bi-check"></i></p>
+                            <p style="text-align: center">Approved <i class="bi bi-check"></i></p>
                         @endif
 
                     </td>

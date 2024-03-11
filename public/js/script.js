@@ -255,6 +255,7 @@ function switchLogin() {
         login = true;
     }
 }
+
 function validation(type) {
     if (type == 'login') {
         let email = document.querySelector('#email1');

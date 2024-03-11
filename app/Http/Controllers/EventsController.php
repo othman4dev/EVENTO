@@ -110,6 +110,10 @@ class EventsController extends Controller
             ->where('approved', 1)
             ->where('deleted', 0)
             ->first();
+        // $sql = "SELECT events.* , users.* , categories.* , reservations.* , events.id as event_id , reservation.id as reserved
+        // LEFT JOIN users ON users.id = events.user_id
+        
+        // ";
         return redirect('/event')->with(compact('event'));
     }
     public static function event() {

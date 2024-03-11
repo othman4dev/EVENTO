@@ -91,6 +91,9 @@ class OrganizatorController extends Controller
             ->leftJoin('categories', 'categories.id', '=', 'events.category_id')
             ->where('events.id', $id)
             ->first();
+        if ($event->user_id != session('user')->id) {
+            return redirect('/profile');
+        }
         $categories = DB::table('categories')->get();
         return view('organizator.edit', ['event' => $event , 'categories' => $categories]);
     }
