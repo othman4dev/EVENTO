@@ -15,11 +15,14 @@ return new class extends Migration
             $table->string('location');
             $table->string('image');
             $table->integer('places');
+            $table->integer('spots');
             $table->date('date');
             $table->time('time');
             $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
+            $table->integer('approved')->default(0);
+            $table->integer('deleted')->default(0);
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');
             $table->rememberToken();

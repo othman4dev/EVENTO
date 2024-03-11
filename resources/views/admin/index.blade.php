@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 
 <section class="all">
@@ -12,19 +12,11 @@
             
         </div>
     </section>
-    <section class="feed" style="width: 100%">
+    <section class="feed">
         <section class="my-city">
             <div class="nearby">
                 <h1>Nearby</h1>
             </div>
-            @if (count($posts) == 0)
-                <div class="nearby-option">
-                    <div class="no-events-nearby">
-                        <h1><i class="bi bi-emoji-frown-fill"></i> No Events Yet</h1>
-                        <p>Start adding events to your profile</p>
-                    </div>
-                </div>
-            @endif
             @foreach ($posts as $post)
             <div class="nearby-option" onclick="window.location.href='/getEvent/{{ $post->event_id}}'">
                 <div class="nearby-option-logo">
@@ -40,6 +32,9 @@
                 
             </div>
             @endforeach
+            <div class="nearby-loading">
+                <div class="loader"></div>
+            </div>
         </section>
         <section class="posts">
             @foreach ( $posts as $post)
@@ -54,26 +49,7 @@
                         </div>
                     </div>
                     <div class="post-buttons">
-                        @if (@$post->reserved !== null)
-                            <button class="post-btns-btn" disabled> Reserved <i class="bi bi-check"></i></button>
-                        @elseif ( @$post->reserved == null) 
-                            <button class="post-btns-btn" onclick="reserveAjax( {{ $post->event_id }} , this)"> Reserve <i class="bi bi-person-check-fill"></i></button>
-                        @endif
-                        <button class="post-btns-btn" onclick="showMore(this.nextElementSibling)">More <i class="bi bi-three-dots-vertical button-icons"></i></button>
-                        <div class="more-dropdown">
-                            <div class="more-option" onclick="window.location.href = '/getEvent/{{ $post->event_id }}'">
-                                <i class="bi bi-bookmark" style="font-size: 15px;"></i>
-                                <span>More Info</span>
-                            </div>
-                            <div class="more-option" onclick="this.parentNode.parentNode.parentNode.parentNode.style.animationName = 'hideEvent'">
-                                <i class="bi bi-eye-slash" style="font-size: 15px;"></i>
-                                <span>Hide</span>
-                            </div>
-                            <div class="more-option">
-                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 15px;"></i>
-                                <span>Report</span>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="post-body">
@@ -124,15 +100,6 @@
                 </div>
             </div>
             @endforeach
-            {{ $posts->links() }}
-            @if (count($posts) == 0)
-                <div class="post">
-                    <div class="no-events">
-                        <h1><i class="bi bi-emoji-frown-fill"></i> No Events Yet</h1>
-                        <p>Start adding events to your profile</p>
-                    </div>
-                </div>  
-            @endif
         </section>
     </section>
 </section>

@@ -22,7 +22,7 @@
                 @foreach ($posts as $post)
                 <tr>
                     <td>{{ $post->title }}</td>
-                    <td>{{Illuminate\Support\Str::limit($post->description , 25)}}</td>
+                    <td>{!! Illuminate\Support\Str::limit($post->description , 25) !!}</td>
                     <td>{{Illuminate\Support\Str::limit($post->location , 25)}}</td>
                     <td>{{ $post->places }}</td>
                     <td>{{ $post->spots }}</td>

@@ -54,15 +54,11 @@
                 <i class="bi bi-list"></i>
             </div>
             <div class="main-side" id="main-side">
-                <div class="side-option" onclick="window.location.href = '/'">
-                    <i class="bi bi-house" style="font-size: 20px;"></i>
-                    <span>Home</span>
-                </div>
                 <div class="side-option" onclick="window.location.href = '/myevents'">
                     <i class="bi bi-shop-window" style="font-size: 20px;"></i>
                     <span>My Events</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/'">
+                <div class="side-option" onclick="window.location.href = '/reservations'">
                     <i class="bi bi-cash-coin" style="font-size: 20px"></i>
                     <span>Reservations</span>
                 </div>
@@ -70,11 +66,11 @@
                     <i class="bi bi bi-toggles" style="font-size: 20px;"></i>
                     <span>Switch To User</span>
                 </div>
-                <div class="side-option">
+                <div class="side-option" onclick="window.location.href = '/profile'">
                     <i class="bi bi-person" style="font-size: 20px;"></i>
                     <span>Profile</span>
                 </div>
-                <div class="side-option">
+                <div class="side-option" onclick="window.location.href = '/settings'">
                     <i class="bi bi-gear" style="font-size: 20px;"></i>
                     <span>Settings</span>
                 </div>

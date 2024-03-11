@@ -44,11 +44,11 @@
             <div class="x-btn" onclick="dropdown(this)">
                 <i class="bi bi-x-lg"></i>
             </div>
-            <div class="drop-option" onclick="window.location.href = '/user/profile'">
+            <div class="drop-option" onclick="window.location.href = '/profile'">
                 <i class="bi bi-person" style="font-size: 20px;"></i>
                 <span>Profile</span>
             </div>
-            <div class="drop-option" onclick="window.location.href = '/user/settings'">
+            <div class="drop-option" onclick="window.location.href = '/settings'">
                 <i class="bi bi-gear" style="font-size: 20px;"></i>
                 <span>Settings</span>
             </div>
@@ -68,24 +68,20 @@
                     <i class="bi bi-house" style="font-size: 20px;"></i>
                     <span>Home</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/user/events'">
+                <div class="side-option" onclick="window.location.href = '/events'">
                     <i class="bi bi-shop-window" style="font-size: 20px;"></i>
                     <span>Events</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/user/reservations'">
+                <div class="side-option" onclick="window.location.href = '/myReservations'">
                     <i class="bi bi-ticket-detailed" style="font-size: 20px"></i>
                     <span>My Tickets</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-info-circle" style="font-size: 20px;" onclick="window.location.href='/user/help'"></i>
+                    <i class="bi bi-info-circle" style="font-size: 20px;" onclick="window.location.href='/help'"></i>
                     <span>Help</span>
                 </div>
                 <div class="side-option">
-                    <i class="bi bi-person" style="font-size: 20px;" onclick="window.location.href='/user/profile'"></i>
-                    <span>Profile</span>
-                </div>
-                <div class="side-option">
-                    <i class="bi bi-gear" style="font-size: 20px;" onclick="window.location.href='/user/settings'"></i>
+                    <i class="bi bi-gear" style="font-size: 20px;" onclick="window.location.href='/settings'"></i>
                     <span>Settings</span>
                 </div>
             </div>
@@ -104,7 +100,6 @@
             </div>
             <div class="modal-body">
                 <p class="modal-description" id="alert-message">{{ session('message') }}</p>
-                <p class="event-description" id="event-details"></p>
             </div>
             <div class="modal-footer">
                 <button class="modal-buttons" id="reserve-btn" onclick="this.parentNode.parentNode.parentNode.style.display = 'none'">Ok</button>

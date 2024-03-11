@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Posts;
+use App\Models\Events;
 
-class PostsController extends Controller
+class EventsController extends Controller
 {
     public static function allPosts() {
         if (session('user') == null) {
             $posts = DB::table('events')
-            ->select('events.*', 'users.*', 'categories.*', 'reservation.*', 'events.id as event_id', 'reservation.id as reserved')
-            ->leftJoin('users', 'users.id', '=', 'events.user_id')
-            ->leftJoin('categories', 'categories.id', '=', 'events.category_id')
-            ->leftJoin('reservation', function ($join) {
-                $join->on('reservation.event_id', '=', 'events.id')
-                    ->where('reservation.user_id', '=', 0);
-            })
-            ->get();
+                ->select('events.*', 'users.*', 'categories.*', 'reservation.*', 'events.id as event_id', 'reservation.id as reserved')
+                ->leftJoin('users', 'users.id', '=', 'events.user_id')
+                ->leftJoin('categories', 'categories.id', '=', 'events.category_id')
+                ->leftJoin('reservation', function ($join) {
+                    $join->on('reservation.event_id', '=', 'events.id')
+                        ->where('reservation.user_id', '=', 0);
+                })
+                ->where('approved', 1)
+                ->where('deleted', 0)
+                ->get();
         } else {
             $posts = DB::table('events')
             ->select('events.*', 'users.*', 'categories.*', 'reservation.*', 'events.id as event_id', 'reservation.id as reserved')
@@ -28,7 +30,9 @@ class PostsController extends Controller
                 $join->on('reservation.event_id', '=', 'events.id')
                     ->where('reservation.user_id', '=', session('user')->id);
             })
-            ->get();
+            ->where('approved', 1)
+            ->where('deleted', 0)
+            ->simplePaginate(5);
         }
         return $posts;
     }
@@ -46,16 +50,21 @@ class PostsController extends Controller
             if ($event) {
                 echo 'You have already reserved this event';
             } else {
-            $reservation = DB::table('reservation')->insert([
-                'event_id' => $id,
-                'user_id' => session('user')->id
-            ]);
             $places = DB::table('events')->where('id', $id)->value('spots');
-
-            DB::table('events')->where('id', $id)->update([
-                'spots' => $places - 1
-            ]);
-            echo "Reserved";
+            if ($places == 0) {
+                echo "No places left";
+            } else {
+                $token = rand(1000, 9999);
+                $reservation = DB::table('reservation')->insert([
+                    'event_id' => $id,
+                    'user_id' => session('user')->id,
+                    'token' => $token
+                ]);
+                DB::table('events')->where('id', $id)->update([
+                    'spots' => $places - 1
+                ]);
+                echo "Reserved";
+            }
             }
         }
     }
@@ -88,7 +97,7 @@ class PostsController extends Controller
         ]);
         return redirect('/events');
     }
-    public static function event($id) {
+    public static function getEvent($id) {
         $event = DB::table('events')
             ->select('events.*', 'users.*', 'categories.*', 'reservation.*', 'events.id as event_id', 'reservation.id as reserved')
             ->leftJoin('users', 'users.id', '=', 'events.user_id')
@@ -98,36 +107,16 @@ class PostsController extends Controller
                     ->where('reservation.user_id', '=', 0);
             })
             ->where('events.id', $id)
+            ->where('approved', 1)
+            ->where('deleted', 0)
             ->first();
+        return redirect('/event')->with(compact('event'));
+    }
+    public static function event() {
+        $event = session('event');
         return view('user.event', ['event' => $event]);
     }
-    public static function addEvent(Request $request) {
-        $title = $request->input('title');
-        $description = $request->input('description');
-        $location = $request->input('location');
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('uploads'), $imageName);
-        $places = $request->input('spots');
-        $date = $request->input('date');
-        $time = $request->input('time');
-        $price = $request->input('price');
-        $category = $request->input('category');
-        $user = session('user')->id;
-        DB::table('events')->insert([
-            'title' => $title,
-            'description' => $description,
-            'location' => $location,
-            'image' => '../uploads/'.$imageName,
-            'places' => $places,
-            'spots' => $places,
-            'date' => $date,
-            'time' => $time,
-            'price' => $price,
-            'category_id' => $category,
-            'user_id' => $user
-        ]);
-        return redirect('/add');
-    }
+    
     public static function search($search) {
         $posts = DB::table('events')
             ->select('events.*', 'users.*', 'categories.*', 'reservation.*', 'events.id as event_id', 'reservation.id as reserved')
@@ -141,8 +130,17 @@ class PostsController extends Controller
                 $query->where('title', 'like', '%'.$search.'%')
                       ->orWhere('description', 'like', '%'.$search.'%');
             })
+            ->where('approved', 1)
+            ->where('deleted', 0)
             ->get();
         $result = "";
+        if ($posts->isEmpty()) {
+            $result = "<div class='result'>
+                <div class='no-result'>
+                <i class='bi bi-emoji-frown-fill'></i> No results found
+                </div>
+            </div>";
+        } else {
         foreach ($posts as $post) {
             $result = $result ."
             <div class='result'>
@@ -155,13 +153,13 @@ class PostsController extends Controller
                         <p class='result-description'>".substr($post->description, 0, 20)."</p>
                     </div>
                 </div>
-                <div class='link-to-post' onclick=\"window.location.href = '/event/".$post->event_id."'\">
+                <div class='link-to-post' onclick=\"window.location.href = '/getEvent/".$post->event_id."'\">
                     <i class='bi bi-arrow-right-circle-fill'></i>
                 </div>
             </div>
             ";
         }
-        
+    }
         echo $result;
     }
 }

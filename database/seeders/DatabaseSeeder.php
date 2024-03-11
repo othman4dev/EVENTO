@@ -16,21 +16,26 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // for ($i = 0; $i < 10; $i++) {
-        //     $places = $faker->randomNumber(4);
-        //     DB::table('events')->insert([
-        //         'title' => $faker->sentence,
-        //         'description' => $faker->paragraph,
-        //         'location' => $faker->address,
-        //         'image' => $faker->imageUrl(),
-        //         'places' => $places,
-        //         'spots' => $places,
-        //         'date' => $faker->date(),
-        //         'time' => $faker->time(),
-        //         'price' => $faker->randomFloat(2, 1, 100),
-        //         'category_id' => $faker->numberBetween(1, 3),
-        //         'user_id' => $faker->numberBetween(1, 3),
-        //     ]);
-        // }
+        for ($i = 0; $i < 10; $i++) {
+            $places = $faker->randomNumber(4);
+            DB::table('events')->insert([
+                'title' => $faker->sentence,
+                'description' => $faker->paragraph,
+                'location' => $faker->address,
+                'image' => $faker->imageUrl(),
+                'places' => $places,
+                'spots' => $places,
+                'date' => $faker->date(),
+                'time' => $faker->time(),
+                'price' => $faker->randomFloat(2, 1, 100),
+                'category_id' => $faker->numberBetween(1, 3),
+                'user_id' => $faker->numberBetween(1, 3),
+            ]);
+        }
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('categories')->insert([
+                'category' => $faker->word(),
+            ]);
+        }
     }
 }

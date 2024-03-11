@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\EmailController;
+use App\Models\Events;
 
 
 class LoginController extends Controller
@@ -54,7 +55,6 @@ class LoginController extends Controller
             session()->forget('token');
             session(['token' => $token]);
             session(['email' => $email]);
-            dd($email);
             DB::table('users')->insert(['firstname' => $firstname , 'lastname' => $lastname ,'email' => $email, 'password' => $password]);
             EmailController::sendMail($email, $name,session('token'));
             return redirect('/verify');

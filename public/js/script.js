@@ -4,60 +4,64 @@ console.log('│                 Welcome to QuickTable!              │');
 console.log('│                                                     │');
 console.log('╰─────────────────────────────────────────────────────╯');
 
-document.addEventListener('DOMContentLoaded',function(event){
-    // array with texts to type in typewriter
-    var dataText = [
-        "Discover Exciting Events Near You.",
-        "Seamless Event Reservation Experience.",
-        "Find, Book, and Attend Events Effortlessly.",
-        "Elevate Your Event Experience with Evento"
-    ];
-    
-    // type one text in the typwriter
-    // keeps calling itself until the text is finished
-    function typeWriter(text, i, fnCallback) {
-      // chekc if text isn't finished yet
-      if (i < (text.length)) {
-        // add next character to h1
-       document.querySelector("#login-animation").innerHTML = text.substring(0, i+1) +'<span class="test-animation" aria-hidden="true"></span>';
-  
-        // wait for a while and call this function again for next character
-        setTimeout(function() {
-          typeWriter(text, i + 1, fnCallback)
-        }, 100);
-      }
-      // text finished, call callback if there is a callback function
-      else if (typeof fnCallback == 'function') {
-        // call callback after timeout
-        setTimeout(fnCallback, 700);
-      }
-    }
-    // start a typewriter animation for a text in the dataText array
-     function StartTextAnimation(i) {
-       if (typeof dataText[i] == 'undefined'){
-          setTimeout(function() {
-            StartTextAnimation(0);
-          }, 20000);
-       }
-       // check if dataText[i] exists
-      if (i < dataText[i].length) {
-        // text exists! start typewriter animation
-       typeWriter(dataText[i], 0, function(){
-         // after callback (and whole text has been animated), start next text
-         StartTextAnimation(i + 1);
-       });
-      }
-    }
-    // start the text animation
-    StartTextAnimation(0);
-  });
 
-  let loginType = window.location.href.split('?')[1];
+if (document.querySelector("#login-animation")) {
+    document.addEventListener('DOMContentLoaded',function(event){
+        // array with texts to type in typewriter
+        var dataText = [
+            "Discover Exciting Events Near You.",
+            "Seamless Event Reservation Experience.",
+            "Find, Book, and Attend Events Effortlessly.",
+            "Elevate Your Event Experience with Evento"
+        ];
+        
+        // type one text in the typwriter
+        // keeps calling itself until the text is finished
+        function typeWriter(text, i, fnCallback) {
+          // chekc if text isn't finished yet
+          if (i < (text.length)) {
+            // add next character to h1
+           document.querySelector("#login-animation").innerHTML = text.substring(0, i+1) +'<span class="test-animation" aria-hidden="true"></span>';
+      
+            // wait for a while and call this function again for next character
+            setTimeout(function() {
+              typeWriter(text, i + 1, fnCallback)
+            }, 100);
+          }
+          // text finished, call callback if there is a callback function
+          else if (typeof fnCallback == 'function') {
+            // call callback after timeout
+            setTimeout(fnCallback, 700);
+          }
+        }
+        // start a typewriter animation for a text in the dataText array
+         function StartTextAnimation(i) {
+           if (typeof dataText[i] == 'undefined'){
+              setTimeout(function() {
+                StartTextAnimation(0);
+              }, 20000);
+           }
+           // check if dataText[i] exists
+          if (i < dataText[i].length) {
+            // text exists! start typewriter animation
+           typeWriter(dataText[i], 0, function(){
+             // after callback (and whole text has been animated), start next text
+             StartTextAnimation(i + 1);
+           });
+          }
+        }
+        // start the text animation
+        StartTextAnimation(0);
+      });    
+}
+if (window.location.href.split('?')[1]) {
+    let loginType = window.location.href.split('?')[1];
   if (loginType == 'login') {
       //switchLogin();
   } else if (loginType === 'register') {
       switchLogin();
   }
+}
 
 // This is the start of script :
 function reserveAjax(id, element) {
@@ -109,6 +113,9 @@ function searchAjax(element) {
         document.getElementById('search-results').style.display = 'none';
     } else {
         document.getElementById('search-results').style.display = 'flex';
+        document.getElementById('search-results').innerHTML = `<div class="search-loading">
+        <div class="loader"></div>
+    </div>`;
     }
     let xhr = new XMLHttpRequest();
     let search = element.value;
@@ -121,7 +128,6 @@ function searchAjax(element) {
         }
     };
     xhr.send();
-
 }
 
 let side = true;
@@ -153,8 +159,9 @@ function shrinkSide(btn) {
         side = true;
     }
 }
-shrinkSide(document.querySelector('.menu-btn'));
-
+if (shrinkSide) {
+    shrinkSide(document.querySelector('.menu-btn'));
+}
 let more = false;
 
 function showMore(element) {
@@ -225,14 +232,17 @@ function changeImage() {
     currentIndex = (currentIndex + 1) % pictures.length;
 }
 
-let iterations = 0;
-let intervalId = setInterval(() => {
-    changeImage();
-    iterations++;
-    if (iterations === maxIterations) {
-        clearInterval(intervalId);
-    }
-}, interval);
+if (document.getElementById('slider')) {
+    let iterations = 0;
+    let intervalId = setInterval(() => {
+        changeImage();
+        iterations++;
+        if (iterations === maxIterations) {
+            clearInterval(intervalId);
+        }
+    }, interval);
+}
+
 
 var login = true;
 
@@ -328,4 +338,41 @@ function sendMail(email) {
     var requestBody = JSON.stringify({ email: email });
 
     xhr.send(requestBody);
+}
+function showAdd(element,that) {
+    if (element.style.display === 'none') {
+        element.style.display = 'flex';
+        that.lastElementChild.classList.remove('bi-plus-circle');
+        that.lastElementChild.classList.add('bi-caret-up');
+    } else {
+        element.style.display = 'none';
+        that.lastElementChild.classList.remove('bi-caret-up');
+        that.lastElementChild.classList.add('bi-plus-circle');
+    }
+}
+function transferDel(id,name) {
+    if (document.getElementById('deleteModal').style.display == 'none') {
+        document.querySelector('#deleteModal').style.display = 'flex';
+        document.querySelector('#deleteModal').querySelector('form').action = `/deleteCat/${id}`;
+        document.querySelector('#deleteModal').querySelector('#category-name').innerText = name;
+    } else {
+        document.getElementById('deleteModal').style.display = 'none';
+    }
+    
+}
+function transferEdit(id,name) {
+    if (document.getElementById('editModal').style.display == 'none') {
+        document.getElementById('editModal').style.display = 'flex';
+        document.querySelector('#editModal').querySelector('#cat-id').value = id;
+        document.querySelector('#editModal').querySelector('#category-name').value = name;
+    } else {
+        document.getElementById('editModal').style.display = 'none';
+    }
+}
+function addCat() {
+    if (document.getElementById('addModal').style.display == 'none') {
+        document.querySelector('#addModal').style.display = 'flex';
+    } else {
+        document.querySelector('#addModal').style.display = 'none';
+    }
 }

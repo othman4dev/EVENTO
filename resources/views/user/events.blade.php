@@ -2,31 +2,13 @@
 @section('content')
 
 <section class="all">
-    <section class="advertisement">
-        <div class="overplay">
-            <h1 class="title-ad"><img src="assets/LOGO.svg" style="height: 100px;margin-left:20px" class="inline-img" alt=""></h1>
-            <h2 class="sub-ad">Find, Book, and Attend Events Effortlessly.</h2>
-            <h5 class="types">Elevate Your Event Experience with Evento</h5>
-        </div>
-        <div class="slider" id="slider">
-            
-        </div>
-    </section>
     <section class="feed" style="width: 100%">
         <section class="my-city">
             <div class="nearby">
                 <h1>Nearby</h1>
             </div>
-            @if (count($posts) == 0)
-                <div class="nearby-option">
-                    <div class="no-events-nearby">
-                        <h1><i class="bi bi-emoji-frown-fill"></i> No Events Yet</h1>
-                        <p>Start adding events to your profile</p>
-                    </div>
-                </div>
-            @endif
             @foreach ($posts as $post)
-            <div class="nearby-option" onclick="window.location.href='/getEvent/{{ $post->event_id}}'">
+            <div class="nearby-option">
                 <div class="nearby-option-logo">
                     {{ $post->spots }}
                 </div>
@@ -40,6 +22,17 @@
                 
             </div>
             @endforeach
+            @if (count($posts) == 0)
+                <div class="nearby-option">
+                    <div class="no-events-nearby">
+                        <h1><i class="bi bi-emoji-frown-fill"></i> No Events Yet</h1>
+                        <p>Start adding events to your profile</p>
+                    </div>
+                </div>
+            @endif
+            <div class="nearby-loading">
+                <div class="loader"></div>
+            </div>
         </section>
         <section class="posts">
             @foreach ( $posts as $post)
@@ -124,7 +117,6 @@
                 </div>
             </div>
             @endforeach
-            {{ $posts->links() }}
             @if (count($posts) == 0)
                 <div class="post">
                     <div class="no-events">

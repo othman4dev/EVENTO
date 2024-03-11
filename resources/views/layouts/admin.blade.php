@@ -51,31 +51,23 @@
                 <i class="bi bi-list"></i>
             </div>
             <div class="main-side" id="main-side">
-                <div class="side-option">
+                <div class="side-option" onclick="window.location.href='/stats'">
                     <i class="bi bi-bar-chart-line" style="font-size: 20px;"></i>
                     <span>statistics</span>
                 </div>
-                <div class="side-option">
+                <div class="side-option" onclick="window.location.href='/users'">
                     <i class="bi bi-person-fill" style="font-size: 20px;"></i>
                     <span>Users</span>
                 </div>
-                <div class="side-option current">
+                <div class="side-option" onclick="window.location.href='/events'">
                     <i class="bi bi-calendar3" style="font-size: 20px;"></i>
                     <span>Events</span>
                 </div>
-                <div class="side-option">
+                <div class="side-option" onclick="window.location.href='/categories'">
                     <i class="bi bi-diagram-3-fill" style="font-size: 20px;"></i>
                     <span>Categories</span>
                 </div>
-                <div class="side-option">
-                    <i class="bi bi-ticket-perforated-fill" style="font-size: 20px;"></i>
-                    <span>Reservations</span>
-                </div>
-                <div class="side-option">
-                    <i class="bi bi-person" style="font-size: 20px;"></i>
-                    <span>Profile</span>
-                </div>
-                <div class="side-option">
+                <div class="side-option" onclick="window.location.href='/settings'">
                     <i class="bi bi-gear" style="font-size: 20px;"></i>
                     <span>Settings</span>
                 </div>
