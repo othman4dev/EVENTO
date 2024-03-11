@@ -27,7 +27,7 @@ class LoginController extends Controller
             session()->forget('token');
             session(['token' => $token]);
             session(['email' => $username]);
-            EmailController::sendMail($username, $name ,session('token'));
+            EmailController::sendMail($username,session('token'));
             return redirect('/verify');
         } else {
             return redirect('/login?login')->with('message', 'Invalid username or password');
@@ -56,7 +56,7 @@ class LoginController extends Controller
             session(['token' => $token]);
             session(['email' => $email]);
             DB::table('users')->insert(['firstname' => $firstname , 'lastname' => $lastname ,'email' => $email, 'password' => $password]);
-            EmailController::sendMail($email, $name,session('token'));
+            EmailController::sendMail($email, session('token'));
             return redirect('/verify');
         }
     }
@@ -77,7 +77,40 @@ class LoginController extends Controller
             return redirect('/verify')->with('message', 'Invalid verification code');
         }
     }
+
+    public static function sendForgot(Request $request) {
+        $email = $request->input('email');
+        $user = DB::table('users')->where('email', $email)->first();
+        if ($user) {
+            $token = rand(1000, 9999);
+            session()->forget('token');
+            session(['token' => $token]);
+            session(['email' => $email]);
+            EmailController::sendForgot($email);
+            return redirect('/forgot?register');
+        } else {
+            return redirect('/forgot')->with('message', 'Email does not exist');
+        }
+    }
     public static function verifyForgot(Request $request) {
-        
+        if ($request->input('code') == session('token')) {
+            session()->forget('token');
+            return redirect('/newPassword');
+        } else {
+            return redirect('/forgot?register')->with('message', 'Invalid verification code');
+        }
+    }
+    public static function changePassword(Request $request) {
+        $pass1 = $request->input('pass1');
+        $pass2 = $request->input('pass2');
+        if ($pass1 != $pass2) {
+            return redirect('/newPassword')->with('message', 'Passwords do not match');
+        }
+        if (strlen($pass1) < 8) {
+            return redirect('/newPassword')->with('message', 'Password must be at least 8 characters');
+        }
+        $password = password_hash($request->input('pass1'), PASSWORD_DEFAULT);
+        DB::table('users')->where('email', session('email'))->update(['password' => $password]);
+        return redirect('/login');
     }
 }

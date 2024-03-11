@@ -137,12 +137,12 @@ Route::get('/myevents' , function (){
     }
 });
 
-Route::get('/reservations' , function (){
+Route::get('/money' , function (){
     if (session('user')->role == 'Admin') {
         return view('404');
     } else if (session('user')->role == 'Organizator') {
         $myevents = OrganizatorController::myevents();
-        return view('organizator.reservations',['myevents' => $myevents]);
+        return view('organizator.money',['myevents' => $myevents]);
     } else if (session('user')->role == 'User') {
         return view('404');
     }
@@ -168,4 +168,20 @@ Route::get('/myReservations', [UserController::class, 'myreservations']);
 
 Route::get('/deleteEvent/{id}', [OrganizatorController::class, 'deleteEvent'])->name('deleteEvent');
 
-Route::get('/ticket/{id}', [EmailController::class, 'sendTicket'])->name('sendTicket');
+Route::get('/ticket/{id}', [UserController::class, 'sendTicket'])->name('sendTicket');
+
+Route::get('/reservations' , [OrganizatorController::class, 'reservations']);
+
+Route::post('/sendForgot', [LoginController::class, 'sendForgot']);
+
+Route::post('/verifyForgot', [LoginController::class, 'verifyForgot']);
+
+Route::get('/newPassword', function () {
+    return view('newPassword');
+});
+
+Route::post('/changePassword', [LoginController::class, 'changePassword']);
+
+Route::get('/approveReservation/{id}', [OrganizatorController::class, 'approveReservation'])->name('approveReservation');
+
+Route::get('/rejectReservation/{id}', [OrganizatorController::class, 'rejectReservation'])->name('rejectReservation');

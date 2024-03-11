@@ -110,12 +110,6 @@
                     <div class="nearby">
                         <h1>Top Events</h1>
                     </div>
-                    <div class="post">
-                        <div class="no-events">
-                            <h1><i class="bi bi-emoji-frown-fill"></i> No Events Yet</h1>
-                            <p>Start adding events to your profile</p>
-                        </div>
-                    </div>  
                     @foreach ($myevents as $post)
                     <div class="nearby-option" onclick="window.location.href='/getEvent/{{ $post->event_id}}'">
                         <div class="nearby-option-logo">

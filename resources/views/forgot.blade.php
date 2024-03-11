@@ -8,15 +8,15 @@
                     <h1 class="login-h1" style="color: white;"><img src="assets/LOGO.svg" class="table-icon" alt=""></h1>
                 </div>
                 <h2 class="login-title">Forgot Password</h2>
-                <form action="/forgot" onsubmit="return false;" method="post" class="login-form" id="login-form">
+                <form action="/sendForgot" method="post" class="login-form" id="login-form">
                     @csrf
                     <div class="input-container">
                         <label for="email" class="input-label">We will send a verification code to this Email</label>
-                        <input type="email" name="email" id="email1" value="{{ session('email') }}" style="font-style:italic" readonly class="input-field" required>
+                        <input type="email" name="email" id="email1" value="{{ session('email') }}" style="font-style:italic" class="input-field" required>
                     </div>
                     <a href="/login" class="forgot"><p class="error">{{ session('message') }}</p>Log in</a>
                     <div class="login-btns">
-                        <button onclick="switchLogin();sendMail( {{ session('email') }} )" class="login-button">Send</button>
+                        <button class="login-button" type="submit">Send</button>
                     </div>
                     <a class="forgot" href="/login?login">Log In with a diffrent account</a>
                 </form>
@@ -26,7 +26,7 @@
                     <h1 class="login-h1" style="color: white;"><img src="assets/LOGO.svg" class="table-icon" alt=""></h1>
                 </div>
                 <h2 class="login-title">Reset Password</h2>
-                <form action="/verifyCode" method="post" class="login-form" id="login-form">
+                <form action="/verifyForgot" method="post" class="login-form" id="login-form">
                     @csrf
                     <div class="input-container">
                         <label for="password" class="input-label">Code</label>

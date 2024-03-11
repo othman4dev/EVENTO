@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
                 'date' => $faker->date(),
                 'time' => $faker->time(),
                 'price' => $faker->randomFloat(2, 1, 100),
-                'category_id' => $faker->numberBetween(1, 3),
+                'category_id' => 2,
                 'user_id' => $faker->numberBetween(1, 3),
             ]);
         }

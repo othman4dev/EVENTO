@@ -44,10 +44,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Your ticket to the event : {{ session('event')->title }}</h1>
-        <p>Your ticket code  is : {{ session('event')->token }}</p>
+        <h1>Your ticket to the event : {{ session('event_title') }}</h1>
+        <p>Your ticket code  is : {{ session('event_token') }}</p>
         <p>Don't share this code with anyone</p>
-        <p>Be there at {{ session('event')->time }} the {{ session('event')->date }}</p>
+        <p>Be there at {{ session('event_time') }} the {{ session('event_date') }} at {{ session('event_location') }}</p>
         <p>Thank you for reserving this event.</p>
     </div>
 </body>

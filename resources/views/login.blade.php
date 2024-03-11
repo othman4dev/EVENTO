@@ -18,7 +18,7 @@
                         <label for="password" class="input-label">Password</label>
                         <input type="password" name="password" id="password" class="input-field" required>
                     </div>
-                    <a href="" class="forgot"><p class="error">{{ session('message') }}</p> Forgot password ?</a>
+                    <a href="/forgot" class="forgot"><p class="error">{{ session('message') }}</p> Forgot password ?</a>
                     <div class="login-btns">
                         <button type="submit" class="login-button" onclick="validation('login')">Login</button>
                     </div>

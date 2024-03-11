@@ -98,4 +98,23 @@ class OrganizatorController extends Controller
         DB::table('events')->where('id', $id)->update(['deleted' => 1]);
         return redirect('/profile');
     }
+    public static function reservations() {
+        $reservations = DB::table('reservation')
+            ->select('events.*', 'reservation.*', 'users.*', 'categories.*', 'reservation.id as reservation_id' ,'events.id as event_id')
+            ->leftJoin('events', 'events.id', '=', 'reservation.event_id')
+            ->leftJoin('users', 'users.id', '=', 'reservation.user_id')
+            ->leftJoin('categories', 'categories.id', '=', 'events.category_id')
+            ->where('events.user_id', session('user')->id)
+            ->get();
+        return view('organizator.reservations', ['reservations' => $reservations]);
+    }
+    public static function approveReservation($id) {
+        DB::table('reservation')->where('id', $id)->update(['status' => 1]);
+
+        return redirect('/reservations');
+    }
+    public static function rejectReservation($id) {
+        DB::table('reservation')->where('id', $id)->update(['status' => 0]);
+        return redirect('/reservations');
+    }
 }

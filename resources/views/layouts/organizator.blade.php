@@ -58,8 +58,12 @@
                     <i class="bi bi-shop-window" style="font-size: 20px;"></i>
                     <span>My Events</span>
                 </div>
-                <div class="side-option" onclick="window.location.href = '/reservations'">
+                <div class="side-option" onclick="window.location.href = '/money'">
                     <i class="bi bi-cash-coin" style="font-size: 20px"></i>
+                    <span>Money</span>
+                </div>
+                <div class="side-option" onclick="window.location.href = '/reservations'">
+                    <i class="bi bi-person-fill-lock" style="font-size: 20px"></i>
                     <span>Reservations</span>
                 </div>
                 <div class="side-option">

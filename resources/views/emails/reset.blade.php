@@ -37,9 +37,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <img src="{{ asset('https://youcode-evento/storage/logo.png') }}" alt="Logo">
-        </div>
         <div class="content">
             <h2>Reset Password</h2>
             <p>Hello,</p>
