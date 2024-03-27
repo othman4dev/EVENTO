@@ -1,66 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Evento Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Evento is a cutting-edge platform dedicated to event management and booking. It aims to provide an optimal user experience for participants, organizers, and administrators. The platform enables users to discover, book, and generate tickets for a variety of events, while organizers have the ability to create and manage their own events.
 
-## About Laravel
+## Functionalities
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### User:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Registration:** Users can sign up by providing their name, email, and password.
+- **Login:** Users can log in to their account using their credentials.
+- **Password Reset:** Users can reset their password via email if forgotten.
+- **Event Discovery:** Users can browse a list of available events with pagination for easy navigation.
+- **Event Filtering:** Users can filter events by category and search events by title.
+- **Event Details:** Users can view event details including description, date, location, and available seats.
+- **Event Reservation:** Users can reserve seats for events.
+- **Ticket Generation:** Users can generate a ticket once their reservation is confirmed.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Organizer:
 
-## Learning Laravel
+- **Event Creation:** Organizers can create new events specifying title, description, date, location, category, and available seats.
+- **Event Management:** Organizers can manage their events.
+- **Reservation Statistics:** Organizers have access to statistics on reservations for their events.
+- **Reservation Handling:** Organizers can choose between automatic reservation acceptance or manual validation.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Administrator:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **User Management:** Administrators can manage user access.
+- **Event Category Management:** Administrators can add, modify, or delete event categories.
+- **Event Validation:** Administrators can validate events created by organizers before publication.
+- **Statistics:** Administrators have access to platform statistics.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Bonus Features:
 
-## Laravel Sponsors
+- **Advanced Event Filtering:** Users can filter events by date or location.
+- **Social Login:** Users can log in using their Google or Facebook accounts.
+- **Email Notifications:** Users receive an email containing their ticket once their reservation is confirmed.
+- **PDF Ticket Generation:** Users can generate their ticket in PDF format once their reservation is confirmed.
+- **Payment System Integration:** Developers can integrate a payment system for event reservations.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Project Presentation
 
-### Premium Partners
+[Link to Presentation](https://www.canva.com/design/DAF-77BjcHk/KiH4QxPggH7lX7l9Oh868A/edit?utm_content=DAF-77BjcHk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Screenshots
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+*Note: Add screenshots of the website in this section to showcase the final product of the project.*
